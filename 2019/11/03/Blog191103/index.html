@@ -9,15 +9,19 @@
   <meta name="google-site-verification" content="pbFNLra7HsJ2hd9pjHoipvbz57toqPEe0q59ZMoI4Gk">
   
   <meta name="baidu-site-verification" content="gaVCFjCucA">
-  <title>Archives: 2019/7 | hhhhhh&#39;s Blog</title>
+  <title>Spring学习小结03 | hhhhhh&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="hhhhhh&#39;s Blog">
-<meta property="og:url" content="https://hhhhhhh1105.github.io/archives/2019/07/index.html">
+  <meta name="description" content="本小结整理Spring两个实现功能（对象）：数据库操作模板（JdbcTemplate）和声明式事务控制（TransactionManager），属于 IOC 与 AOP 的综合应用实例。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring学习小结03">
+<meta property="og:url" content="https://hhhhhhh1105.github.io/2019/11/03/Blog191103/index.html">
 <meta property="og:site_name" content="hhhhhh&#39;s Blog">
+<meta property="og:description" content="本小结整理Spring两个实现功能（对象）：数据库操作模板（JdbcTemplate）和声明式事务控制（TransactionManager），属于 IOC 与 AOP 的综合应用实例。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-01T17:08:05.539Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hhhhhh&#39;s Blog">
+<meta name="twitter:title" content="Spring学习小结03">
+<meta name="twitter:description" content="本小结整理Spring两个实现功能（对象）：数据库操作模板（JdbcTemplate）和声明式事务控制（TransactionManager），属于 IOC 与 AOP 的综合应用实例。">
   
     <link rel="alternative" href="/atom.xml" title="hhhhhh&#39;s Blog" type="application/atom+xml">
   
@@ -170,98 +174,243 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Blog191103" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/27/Blog190727/" class="archive-article-date">
-  	<time datetime="2019-07-27T13:13:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/27/Blog190727/">随想0727</a>
+    <h1 class="article-title" itemprop="name">
+      Spring学习小结03
     </h1>
   
 
-        <div class="article-info info-on-right">
+        
+        <a href="/2019/11/03/Blog191103/" class="archive-article-date">
+  	<time datetime="2019-11-03T04:08:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-03</time>
+</a>
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.7k 字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长约: </span>
+        <span class="post-count">7 分</span>
+      </span>
+    </span>
+</div>
+
           
-          
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本小结整理Spring两个实现功能（对象）：数据库操作模板（JdbcTemplate）和声明式事务控制（TransactionManager），属于 IOC 与 AOP 的综合应用实例。</p>
+<a id="more"></a>
+
+<p>[1] 随学视频地址：<a href="https://www.bilibili.com/video/av50155320" target="_blank" rel="noopener">https://www.bilibili.com/video/av50155320</a><br>[2] <a href="https://blog.csdn.net/ncepu_Chen/article/details/94566610" target="_blank" rel="noopener">https://blog.csdn.net/ncepu_Chen/article/details/94566610</a><br>[3] <a href="https://blog.csdn.net/ncepu_Chen/article/details/94857481" target="_blank" rel="noopener">https://blog.csdn.net/ncepu_Chen/article/details/94857481</a></p>
+<h3 id="数据库操作模板JdbcTemplate"><a href="#数据库操作模板JdbcTemplate" class="headerlink" title="数据库操作模板JdbcTemplate"></a>数据库操作模板JdbcTemplate</h3><p>JdbcTemplate是Spring框架中提供的一个对象,对原始的JDBC API进行简单封装,其用法与DBUtils类似.</p>
+<h4 id="JdbcTemplate对象创建及DataSource配置"><a href="#JdbcTemplate对象创建及DataSource配置" class="headerlink" title="JdbcTemplate对象创建及DataSource配置"></a>JdbcTemplate对象创建及DataSource配置</h4><p>可配置C3P0、DBCP数据、DriverManagerDataSource。均在applicationContext.xml完成配置。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置数据源 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"org.apache.commons.dbcp.BasicDataSource"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/数据库名"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"用户名"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"密码"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 创建JdbcTemplate对象并注入数据源 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"jdbcTemplate"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.core.JdbcTemplate"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="JdbcTemplate基本语法"><a href="#JdbcTemplate基本语法" class="headerlink" title="JdbcTemplate基本语法"></a>JdbcTemplate基本语法</h4><ul>
+<li>JdbcTemplate的增删改操作均可使用<code>JdbcTemplate.update(&quot;SQL语句&quot;, 参数...)</code>实现；</li>
+<li>查询操作通过<code>JdbcTemplate.query(&quot;SQL语句&quot;，RowMapper&lt;T&gt; rowMapper，参数...)</code>实现，其中RowMapper指定如何将查询结果ResultSet对象转换为T对象。</li>
+<li>聚合查询通过<code>JdbcTemplate.queryForObject(&quot;SQL语句&quot;，Class&lt;T&gt; requiredType，参数...)</code>实现。</li>
+</ul>
+<h4 id="基本应用"><a href="#基本应用" class="headerlink" title="基本应用"></a>基本应用</h4><ol>
+<li>JdbcDaoSupport源码作为Dao层实现类的父类。该类定义JdbcTemplate成员变量，和DataSource的set方法。</li>
+<li>Dao层实现类调用继承自父类的getJdbcTemplate()方法获得JdbcTemplate对象，并在Spring配置时注入DataSource对象。JdbcDaoSupport自动调用JdbcTemplate的set方法注入JdbcTemplate。在Dao层实现类中通过super.getJdbcTemplate()方法获得JdbcTemplate对象.（避免手动配置JdbcTemplate成员了）<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//JdbcDaoSupport源码</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcDaoSupport</span> <span class="keyword">extends</span> <span class="title">DaoSupport</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Nullable</span></span><br><span class="line">    <span class="keyword">private</span> JdbcTemplate jdbcTemplate;	<span class="comment">// 定义JdbcTemplate成员变量</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JdbcDaoSupport</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// DataSource的set方法,注入DataSource时调用createJdbcTemplate方法注入JdbcTemplate</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setDataSource</span><span class="params">(DataSource dataSource)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.jdbcTemplate == <span class="keyword">null</span> || dataSource != <span class="keyword">this</span>.jdbcTemplate.getDataSource()) &#123;</span><br><span class="line">            <span class="keyword">this</span>.jdbcTemplate = <span class="keyword">this</span>.createJdbcTemplate(dataSource);</span><br><span class="line">            <span class="keyword">this</span>.initTemplateConfig();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建JdbcTemplate,用来被setDataSource()调用注入JdbcTemplate</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> JdbcTemplate <span class="title">createJdbcTemplate</span><span class="params">(DataSource dataSource)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> JdbcTemplate(dataSource);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// JdbcTemplate的get方法,子类通过该方法获得JdbcTemplate对象</span></span><br><span class="line">    <span class="meta">@Nullable</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> JdbcTemplate <span class="title">getJdbcTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.jdbcTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Nullable</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> DataSource <span class="title">getDataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.jdbcTemplate != <span class="keyword">null</span> ? <span class="keyword">this</span>.jdbcTemplate.getDataSource() : <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setJdbcTemplate</span><span class="params">(@Nullable JdbcTemplate jdbcTemplate)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.jdbcTemplate = jdbcTemplate;</span><br><span class="line">        <span class="keyword">this</span>.initTemplateConfig();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="事务控制-TransactionManager"><a href="#事务控制-TransactionManager" class="headerlink" title="事务控制(TransactionManager)"></a>事务控制(TransactionManager)</h3><p>Spring 框架为我们提供了一组事务控制的接口,这组接口在<code>spring-tx-5.0.2.RELEASE.jar</code>中。</p>
+<h4 id="数据库事务的基础知识"><a href="#数据库事务的基础知识" class="headerlink" title="数据库事务的基础知识"></a>数据库事务的基础知识</h4><h4 id="Spring中事务控制的API"><a href="#Spring中事务控制的API" class="headerlink" title="Spring中事务控制的API"></a>Spring中事务控制的API</h4><ul>
+<li><p><code>PlatformTransactionManager</code>接口是Spring提供的事务管理器,它提供了操作事务的方法如下:</p>
+<ul>
+<li><p><code>TransactionStatus getTransaction(TransactionDefinition definition)</code>: 获得事务状态信息</p>
+</li>
+<li><p><code>void commit(TransactionStatus status)</code>: 提交事务</p>
+</li>
+<li><p><code>void rollback(TransactionStatus status)</code>: 回滚事务</p>
+<p>在实际开发中我们使用其实现类:</p>
+</li>
+</ul>
+<ol>
+<li><code>DataSourceTransactionManager</code>使用SpringJDBC或iBatis进行持久化数据时使用</li>
+<li><code>HibernateTransactionManager</code>使用Hibernate版本进行持久化数据时使用</li>
+</ol>
+</li>
+<li><p><code>TransactionDefinition</code>: 事务定义信息对象,提供查询事务定义的方法如下:</p>
+<ul>
+<li><p><code>String getName()</code>: 获取事务对象名称</p>
+</li>
+<li><p><code>int getIsolationLevel()</code>: 获取事务隔离级别,设置两个事务之间的数据可见性</p>
+<ul>
+<li><p>事务的隔离级别由弱到强,依次有如下五种:(可以参考文章事务的四种隔离级别,数据库事务4种隔离级别及7种传播行为)</p>
+<p>  <code>ISOLATION_DEFAULT</code>: Spring事务管理的的默认级别,使用数据库默认的事务隔离级别.<br>  <code>ISOLATION_READ_UNCOMMITTED</code>: 读未提交.<br>  <code>ISOLATION_READ_COMMITTED</code>: 读已提交.<br>  <code>ISOLATION_REPEATABLE_READ</code>: 可重复读.<br>  <code>ISOLATION_SERIALIZABLE</code>: 串行化.</p>
+</li>
+</ul>
+</li>
+<li><p><code>getPropagationBehavior()</code>: 获取事务传播行为,设置新事务是否事务以及是否使用当前事务.我们通常使用的是前两种: <strong>REQUIRED</strong>和<strong>SUPPORTS</strong>.事务传播行为如下:</p>
+<pre><code>`REQUIRED`: Spring默认事务传播行为. 若当前没有事务,就新建一个事务;若当前已经存在一个事务中,加入到这个事务中.增删改查操作均可用
+`SUPPORTS`: 若当前没有事务,就不使用事务;若当前已经存在一个事务中,加入到这个事务中.查询操作可用
+`MANDATORY`: 使用当前的事务,若当前没有事务,就抛出异常
+`REQUERS_NEW`: 新建事务,若当前在事务中,把当前事务挂起
+`NOT_SUPPORTED`: 以非事务方式执行操作,若当前存在事务,就把当前事务挂起
+`NEVER`:以非事务方式运行,若当前存在事务,抛出异常
+`NESTED`:若当前存在事务,则在嵌套事务内执行;若当前没有事务,则执行REQUIRED类似的操作</code></pre></li>
+<li><p><code>int getTimeout()</code>: 获取事务超时时间. Spring默认设置事务的超时时间为-1,表示永不超时.</p>
+</li>
+<li><p><code>boolean isReadOnly()</code>: 获取事务是否只读. Spring默认设置为false,建议查询操作中设置为true</p>
+</li>
+<li><p><code>TransactionStatus</code>: 事务状态信息对象,提供操作事务状态的方法如下:</p>
+<ul>
+<li><code>void flush()</code>: 刷新事务</li>
+<li><code>boolean hasSavepoint()</code>: 查询是否存在存储点</li>
+<li><code>boolean isCompleted()</code>: 查询事务是否完成</li>
+<li><code>boolean isNewTransaction()</code>: 查询是否是新事务</li>
+<li><code>boolean isRollbackOnly()</code>: 查询事务是否回滚</li>
+<li><code>void setRollbackOnly()</code>: 设置事务回滚</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Spring配置式事务控制"><a href="#Spring配置式事务控制" class="headerlink" title="Spring配置式事务控制"></a>Spring配置式事务控制</h4><ol>
+<li><p>配置事务管理器并注入数据源</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--向Spring容器中注入一个事务管理器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--注入数据源--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置事务通知并在通知中配置其属性</p>
+<ul>
+<li>使用<code>&lt;tx:advice&gt;</code>标签声明事务配置,包含属性id，对应的事务管理器<code>transaction-manager</code>和<code>&lt;tx:attributes&gt;</code>标签，通过<code>&lt;tx:method&gt;</code>为切面上的方法配置事务属性(或通过注解的方式：在业务层接口、类或方法前加上<code>@Transactional</code>注解，功能与method一致)，包含拦截方法名称（可以使用通配符），事务的隔离级别，传播行为等等。<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置事务的通知--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">"txAdvice"</span> <span class="attr">transaction-manager</span>=<span class="string">"transactionManager"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--匹配所有方法--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"*"</span> <span class="attr">propagation</span>=<span class="string">"REQUIRED"</span> <span class="attr">read-only</span>=<span class="string">"false"</span> <span class="attr">rollback-for</span>=<span class="string">""</span> <span class="attr">no-rollback-for</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">&lt;!--匹配所有查询方法--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"find*"</span> <span class="attr">propagation</span>=<span class="string">"SUPPORTS"</span> <span class="attr">read-only</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">&lt;!--第二个&lt;tx:method&gt;匹配得更精确,所以对所有查询方法,匹配第二个事务管理配置;对其他查询方法,匹配第一个事务管理配置--&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>配置AOP并为事务管理器事务管理器指定切入点</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置AOP--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置切入点表达式--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"pt1"</span> <span class="attr">expression</span>=<span class="string">"execution(* cn,maoritian.service.impl.*.*(..))"</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:pointcut</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--为事务通知指定切入点表达式--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">"txAdvice"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pt1"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Thoughts//" class="article-tag-list-link color4">Thoughts</a>
+        			<a href="/categories/Notes//" class="article-tag-list-link color1">Notes</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/14/Blog190714/" class="archive-article-date">
-  	<time datetime="2019-07-14T10:56:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-14</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/12/20/Blog191220/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Spring 过滤器 拦截器 AOP小结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/31/Blog191031/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring学习小结02</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/14/Blog190714/">随想0714</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Thoughts//" class="article-tag-list-link color4">Thoughts</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据库操作模板JdbcTemplate"><span class="toc-number">1.</span> <span class="toc-text">数据库操作模板JdbcTemplate</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JdbcTemplate对象创建及DataSource配置"><span class="toc-number">1.1.</span> <span class="toc-text">JdbcTemplate对象创建及DataSource配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JdbcTemplate基本语法"><span class="toc-number">1.2.</span> <span class="toc-text">JdbcTemplate基本语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本应用"><span class="toc-number">1.3.</span> <span class="toc-text">基本应用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事务控制-TransactionManager"><span class="toc-number">2.</span> <span class="toc-text">事务控制(TransactionManager)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据库事务的基础知识"><span class="toc-number">2.1.</span> <span class="toc-text">数据库事务的基础知识</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spring中事务控制的API"><span class="toc-number">2.2.</span> <span class="toc-text">Spring中事务控制的API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Spring配置式事务控制"><span class="toc-number">2.3.</span> <span class="toc-text">Spring配置式事务控制</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
+        
+    </div>
+</aside>
+
+
   
 
-    
+   
+
+  
+  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: '69d14c5e5d6e9ec19201',
+  	clientSecret: 'a44d3f45b75356aaa7e8f0f9ce594e1710cf4e20',
+  	repo: 'Hhhhhhh1105.github.io',
+  	owner: 'Hhhhhhh1105',
+  	admin: ['Hhhhhhh1105'],
+  	id: 'Sun Nov 03 2019 12:08:00 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -289,8 +438,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
