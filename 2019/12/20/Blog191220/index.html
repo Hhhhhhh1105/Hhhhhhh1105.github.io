@@ -9,21 +9,21 @@
   <meta name="google-site-verification" content="pbFNLra7HsJ2hd9pjHoipvbz57toqPEe0q59ZMoI4Gk">
   
   <meta name="baidu-site-verification" content="gaVCFjCucA">
-  <title>HelloWorld | hhhhhh&#39;s Blog</title>
+  <title>Spring 过滤器 拦截器 AOP小结 | hhhhhh&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第一次尝试记录我的生活">
+  <meta name="description" content="Spring 过滤器 拦截器 AOP小结这几天学习Spring的AOP时，脑海里都是按照方法拦截器思考的，因此本文对过滤器，拦截器，AOP的联系与区别进行小结。在实现一些公共逻辑的时候，很多功能通过过滤器，拦截器，AOP都能实现，但是不同的方式在执行逻辑（位置）上有不同的效率。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HelloWorld">
-<meta property="og:url" content="https://hhhhhhh1105.github.io/2018/07/02/HelloWorld/index.html">
+<meta property="og:title" content="Spring 过滤器 拦截器 AOP小结">
+<meta property="og:url" content="https://hhhhhhh1105.github.io/2019/12/20/Blog191220/index.html">
 <meta property="og:site_name" content="hhhhhh&#39;s Blog">
-<meta property="og:description" content="第一次尝试记录我的生活">
+<meta property="og:description" content="Spring 过滤器 拦截器 AOP小结这几天学习Spring的AOP时，脑海里都是按照方法拦截器思考的，因此本文对过滤器，拦截器，AOP的联系与区别进行小结。在实现一些公共逻辑的时候，很多功能通过过滤器，拦截器，AOP都能实现，但是不同的方式在执行逻辑（位置）上有不同的效率。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://hhhhhhh1105.github.io/assets/blogImg/qiyu.jpg">
-<meta property="og:updated_time" content="2020-02-26T10:23:13.655Z">
+<meta property="og:image" content="https://hhhhhhh1105.github.io/2019/12/20/Blog191220/.%5Cassets%5CblogImg%5Cblog4%5Cimg1.png">
+<meta property="og:updated_time" content="2020-03-01T14:56:32.826Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HelloWorld">
-<meta name="twitter:description" content="第一次尝试记录我的生活">
-<meta name="twitter:image" content="https://hhhhhhh1105.github.io/assets/blogImg/qiyu.jpg">
+<meta name="twitter:title" content="Spring 过滤器 拦截器 AOP小结">
+<meta name="twitter:description" content="Spring 过滤器 拦截器 AOP小结这几天学习Spring的AOP时，脑海里都是按照方法拦截器思考的，因此本文对过滤器，拦截器，AOP的联系与区别进行小结。在实现一些公共逻辑的时候，很多功能通过过滤器，拦截器，AOP都能实现，但是不同的方式在执行逻辑（位置）上有不同的效率。">
+<meta name="twitter:image" content="https://hhhhhhh1105.github.io/2019/12/20/Blog191220/.%5Cassets%5CblogImg%5Cblog4%5Cimg1.png">
   
     <link rel="alternative" href="/atom.xml" title="hhhhhh&#39;s Blog" type="application/atom+xml">
   
@@ -176,20 +176,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-HelloWorld" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Blog191220" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      HelloWorld
+      Spring 过滤器 拦截器 AOP小结
     </h1>
   
 
         
-        <a href="/2018/07/02/HelloWorld/" class="archive-article-date">
-  	<time datetime="2018-07-02T10:27:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-02</time>
+        <a href="/2019/12/20/Blog191220/" class="archive-article-date">
+  	<time datetime="2019-12-20T12:13:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-20</time>
 </a>
         
           <div style="margin-top:10px;">
@@ -197,7 +197,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">108 字</span>
+        <span class="post-count">749 字</span>
       </span>
     </span>
 
@@ -206,7 +206,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长约: </span>
-        <span class="post-count">1 分</span>
+        <span class="post-count">2 分</span>
       </span>
     </span>
 </div>
@@ -217,20 +217,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>第一次尝试记录我的生活</strong></p>
+        <h2 id="Spring-过滤器-拦截器-AOP小结"><a href="#Spring-过滤器-拦截器-AOP小结" class="headerlink" title="Spring 过滤器 拦截器 AOP小结"></a><strong>Spring 过滤器 拦截器 AOP小结</strong></h2><p>这几天学习Spring的AOP时，脑海里都是按照方法拦截器思考的，因此本文对过滤器，拦截器，AOP的联系与区别进行小结。在实现一些公共逻辑的时候，很多功能通过过滤器，拦截器，AOP都能实现，但是不同的方式在执行逻辑（位置）上有不同的效率。</p>
 <a id="more"></a>
 
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=28949128&auto=0&height=66" style="margin-left: -10px;"></iframe>
+<h3 id="前后端基本逻辑"><a href="#前后端基本逻辑" class="headerlink" title="前后端基本逻辑"></a>前后端基本逻辑</h3><p><img src=".%5Cassets%5CblogImg%5Cblog4%5Cimg1.png" alt></p>
+<h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><p>过滤器拦截的是URL。Spring中自定义过滤器（Filter）一般只有一个方法（直接实现Filter接口，重写拦截方法doFilter，通过注解@WebFilter上配置拦截规则即可实现）。当请求到达web容器时，会探测当前请求地址是否配置有过滤器，有则调用该过滤器的方法（可能会有多个过滤器），然后才调用真实的业务逻辑，至此过滤器任务完成。所有的请求都会被filter首先拦截，并可以预处理request（解决中文乱码问题）。</p>
+<p>过滤器并没有定义业务逻辑执行前、后等，仅仅是请求到达就执行。FilterChain是双向的，即过滤链执行完，并且完成业务流程后，会返回到过滤器，此时也可以对请求的返回数据做处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="comment">// 配置过滤规则</span></span><br><span class="line"><span class="meta">@WebFilter</span>(urlPatterns = &#123; <span class="string">"/**"</span> &#125;, filterName = <span class="string">"tokenAuthorFilter"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigurationFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span></span>&#123;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span><span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">	<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">	System.out.println(<span class="string">"过滤器重写过滤方法"</span>);</span><br><span class="line">	chain.doFilter(request, response);<span class="comment">//到下一个链</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig arg0)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">	<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>尝试搭建博客来记录我的学习与生活。。我一直觉得我是一个不怎么热爱生活的人，或许与我没有记录生活的习惯有关。不妨借着这个学习博客尝试着记录属于我的生活吧，或许能坚持下去的话有一天回过头来看还蛮有趣的~<br><br></p>
-<p align="right">2018年7月2日</p>
+<h3 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h3><p>拦截器拦截的是URL。拦截器有三个方法，相对于过滤器更加细致，有被拦截逻辑执行前、后等。Spring中拦截器有三个方法：preHandle（Controller方法调用之前），postHandle（请求处理之后进行调用（Controller方法调用之后），但是在视图被渲染之前），afterCompletion（在整个请求结束之后被调用，也就是在DispatcherServlet 渲染了对应的视图之后执行（主要是用于进行资源清理工作））。和filter类似 实现HandlerInterceptor接口并重写拦截方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">interceptorConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span></span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span></span>&#123;</span><br><span class="line">	registry.addInterceptor(<span class="keyword">new</span> MyInterceptor())</span><br><span class="line">	.addPathPatterns(<span class="string">"/**"</span>); <span class="comment">// //指定拦截器类，指定该类拦截的url</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-<div align="left">
-<img src="/assets/blogImg/qiyu.jpg" width="200" height="200">
-</div>
-
-<!-- 注释-->
+<h2 id="AOP（面向切面）"><a href="#AOP（面向切面）" class="headerlink" title="AOP（面向切面）"></a>AOP（面向切面）</h2><p>面向切面拦截的是类的元数据（包、类、方法名、参数等）AOP操作可以对操作进行横向的拦截,最大的优势在于他可以获取执行方法的参数,对方法进行统一的处理。</p>
+<p>相对于拦截器更加细致灵活，拦截器只能针对URL做拦截，而AOP针对具体的代码（可以理解为<strong>方法拦截</strong>），常见使用日志，事务，请求参数安全验证等能够实现更加复杂的业务逻辑。具体实现看前面总结。</p>
 
       
 
@@ -245,7 +244,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Thoughts//" class="article-tag-list-link color4">Thoughts</a>
+        			<a href="/categories/Notes//" class="article-tag-list-link color1">Notes</a>
         		</li>
       		
 		</ul>
@@ -263,15 +262,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/14/Blog190714/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          随想0714
-        
-      </div>
-    </a>
   
+    <a href="/2019/10/31/Blog191031/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring学习小结02</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -288,6 +283,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-过滤器-拦截器-AOP小结"><span class="toc-number">1.</span> <span class="toc-text">Spring 过滤器 拦截器 AOP小结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前后端基本逻辑"><span class="toc-number">1.1.</span> <span class="toc-text">前后端基本逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#过滤器"><span class="toc-number">1.2.</span> <span class="toc-text">过滤器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拦截器"><span class="toc-number">1.3.</span> <span class="toc-text">拦截器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AOP（面向切面）"><span class="toc-number">2.</span> <span class="toc-text">AOP（面向切面）</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -311,7 +319,7 @@ if(true){
   	repo: 'Hhhhhhh1105.github.io',
   	owner: 'Hhhhhhh1105',
   	admin: ['Hhhhhhh1105'],
-  	id: 'Mon Jul 02 2018 18:27:00 GMT+0800',
+  	id: 'Fri Dec 20 2019 20:13:00 GMT+0800',
   	distractionFreeMode: 'true'
 })
 gitalk.render('gitalk-container') 
