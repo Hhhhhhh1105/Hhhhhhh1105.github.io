@@ -9,21 +9,22 @@
   <meta name="google-site-verification" content="pbFNLra7HsJ2hd9pjHoipvbz57toqPEe0q59ZMoI4Gk">
   
   <meta name="baidu-site-verification" content="gaVCFjCucA">
-  <title>Spring 过滤器 拦截器 AOP小结 | hhhhhh&#39;s Blog</title>
+  <title>随想0714 | hhhhhh&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Spring 过滤器 拦截器 AOP小结">
+  <meta name="description" content="记桓台出差与夏令营志愿者第一天">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring 过滤器 拦截器 AOP小结">
-<meta property="og:url" content="https://hhhhhhh1105.github.io/2019/12/20/Blog4/index.html">
+<meta property="og:title" content="随想0714">
+<meta property="og:url" content="https://hhhhhhh1105.github.io/2019/07/14/Blog190714/index.html">
 <meta property="og:site_name" content="hhhhhh&#39;s Blog">
-<meta property="og:description" content="Spring 过滤器 拦截器 AOP小结">
+<meta property="og:description" content="记桓台出差与夏令营志愿者第一天">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="d:%5CLearn%5CMyBlog%5Csource%5Cassets%5CblogImg%5Cblog4%5Cimg1.png">
-<meta property="og:updated_time" content="2020-03-01T04:25:34.392Z">
+<meta property="og:image" content="https://hhhhhhh1105.github.io/assets/blogImg/blog2.1.jpg">
+<meta property="og:image" content="https://hhhhhhh1105.github.io/assets/blogImg/blog2.2.jpg">
+<meta property="og:updated_time" content="2019-07-14T12:26:23.996Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring 过滤器 拦截器 AOP小结">
-<meta name="twitter:description" content="Spring 过滤器 拦截器 AOP小结">
-<meta name="twitter:image" content="d:%5CLearn%5CMyBlog%5Csource%5Cassets%5CblogImg%5Cblog4%5Cimg1.png">
+<meta name="twitter:title" content="随想0714">
+<meta name="twitter:description" content="记桓台出差与夏令营志愿者第一天">
+<meta name="twitter:image" content="https://hhhhhhh1105.github.io/assets/blogImg/blog2.1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="hhhhhh&#39;s Blog" type="application/atom+xml">
   
@@ -77,7 +78,7 @@
 			</ul>
 		</nav>
 		<nav style="font-size:14px;color:#696969;">
-			总文章数 7
+			总文章数 3
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -176,20 +177,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Blog4" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Blog190714" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Spring 过滤器 拦截器 AOP小结
+      随想0714
     </h1>
   
 
         
-        <a href="/2019/12/20/Blog4/" class="archive-article-date">
-  	<time datetime="2019-12-20T12:13:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-20</time>
+        <a href="/2019/07/14/Blog190714/" class="archive-article-date">
+  	<time datetime="2019-07-14T10:56:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-14</time>
 </a>
         
           <div style="margin-top:10px;">
@@ -197,7 +198,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">751 字</span>
+        <span class="post-count">1.3k 字</span>
       </span>
     </span>
 
@@ -206,7 +207,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长约: </span>
-        <span class="post-count">2 分</span>
+        <span class="post-count">4 分</span>
       </span>
     </span>
 </div>
@@ -217,22 +218,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>Spring 过滤器 拦截器 AOP小结</strong></p>
+        <p><strong>记桓台出差与夏令营志愿者第一天</strong></p>
 <a id="more"></a>
 
-<p>这几天学习Spring的AOP时，脑海里都是按照方法拦截器思考的，因此本文对过滤器，拦截器，AOP的联系与区别进行小结。在实现一些公共逻辑的时候，很多功能通过过滤器，拦截器，AOP都能实现，但是不同的方式在执行逻辑（位置）上有不同的效率。</p>
-<p>[toc]</p>
-<h3 id="前后端基本逻辑"><a href="#前后端基本逻辑" class="headerlink" title="前后端基本逻辑"></a>前后端基本逻辑</h3><p><img src="D:%5CLearn%5CMyBlog%5Csource%5Cassets%5CblogImg%5Cblog4%5Cimg1.png" alt></p>
-<h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><p>过滤器拦截的是URL。Spring中自定义过滤器（Filter）一般只有一个方法（直接实现Filter接口，重写拦截方法doFilter，通过注解@WebFilter上配置拦截规则即可实现）。当请求到达web容器时，会探测当前请求地址是否配置有过滤器，有则调用该过滤器的方法（可能会有多个过滤器），然后才调用真实的业务逻辑，至此过滤器任务完成。所有的请求都会被filter首先拦截，并可以预处理request（解决中文乱码问题）。</p>
-<p>过滤器并没有定义业务逻辑执行前、后等，仅仅是请求到达就执行。FilterChain是双向的，即过滤链执行完，并且完成业务流程后，会返回到过滤器，此时也可以对请求的返回数据做处理。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="comment">// 配置过滤规则</span></span><br><span class="line"><span class="meta">@WebFilter</span>(urlPatterns = &#123; <span class="string">"/**"</span> &#125;, filterName = <span class="string">"tokenAuthorFilter"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigurationFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span></span>&#123;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span><span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">	<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">	System.out.println(<span class="string">"过滤器重写过滤方法"</span>);</span><br><span class="line">	chain.doFilter(request, response);<span class="comment">//到下一个链</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig arg0)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">	<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>今天终于有时间更新博客了。。前两天去桓台的出差真是我入学以来最痛苦的出差，头一天决定第二天一早6：30的火车，然后差点就要一路站到山东了。。然后回来的时候也赶上周末，差点又要站着回来，仅仅只是站了1个小时的时间，腿就累的不得了，或许跟在那边出差的时候没怎么睡好有关系。。这次出差两天加起来也就睡了10个多小时。。当然这是熬夜调bug和王者上分共同导致的 :joy:<br>另外想到第一天晚上超逗的，两个广场舞队伍在线battle！！真的是，两个队伍大约之隔了5m左右，然后放着不同旋律的歌各跳各的。。我还顺手拍了图片可惜看不清楚两队人battle时的腥风血雨~</p>
+<div align="left">
+<img src="/assets/blogImg/blog2.1.jpg" width="400" height="200">
+</div>
+<br>
 
-<h3 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h3><p>拦截器拦截的是URL。拦截器有三个方法，相对于过滤器更加细致，有被拦截逻辑执行前、后等。Spring中拦截器有三个方法：preHandle（Controller方法调用之前），postHandle（请求处理之后进行调用（Controller方法调用之后），但是在视图被渲染之前），afterCompletion（在整个请求结束之后被调用，也就是在DispatcherServlet 渲染了对应的视图之后执行（主要是用于进行资源清理工作））。和filter类似 实现HandlerInterceptor接口并重写拦截方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">interceptorConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span></span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span></span>&#123;</span><br><span class="line">	registry.addInterceptor(<span class="keyword">new</span> MyInterceptor())</span><br><span class="line">	.addPathPatterns(<span class="string">"/**"</span>); <span class="comment">// //指定拦截器类，指定该类拦截的url</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>然后回来的第一天就加入了夏令营志愿者的服务中。。或许为大家服务是我入党的第一步吧~然后帮着这群比我优秀一百倍的人找到寝室还是很有满足感的，虽然仅仅是入营的短短交流，有些人说话时的态度和由内而外散发的气质就让我觉得他肯定能顺利通过夏令营，大概这就是腹有诗书气自华吧。</p>
+<hr>
+<p>本打算写到这里就停下的，但是又想记录一下出差前一晚和Cpy的约饭，C总真的是很有趣很不错的姑娘（同时也很大方。。请我吃饭这么大手笔:joy:），这愈发的让我觉得我们现在这样是朋友or好朋友（至少不是点赞之交吧）是非常正确而又明智的。首先她属实优秀而我无比平庸我承认是配不上她的，其次如果我们真是情侣或我追过她的话反而不能像这次约饭时候气氛那么自然舒服愉悦了，整个过程已经记不太清了，只是感觉我们可以有无限话题可以讨论，无限的人和事可以吐槽，要不因为时间有点晚了我可以一直bb到天亮。当然我也撒谎了，我其实只跟我喜欢的人比较能聊，如果对面的人我不喜欢那我就属于安静的倾听者了（就像出差时默默倾听听一同出差的伙伴吹逼时的我~），但我想这种喜欢不是那种爱慕之意，而是一种来自内心真诚的喜欢，喜欢与她聊天喜欢与她分享每件趣事喜欢看她自信的表达想法想要了解她的世界。我这么喜欢她也许跟我们两个真的很像有关（人都喜欢自己？），特别是看待事物的角度，这么想来，她真的很适合我，我有什么话我都可以找她吐槽（在她不耐烦之前哈哈哈）。但可惜我太菜了又或许都怪我们在一个实验室，每天抬头不见低头见的。。有时候空间上的距离反而可以拉近两个人内心的距离~</p>
+<hr>
+<p>emmm果然开始写就停不下了了，再多说两句好了。。我发现我总是在怨天有人，又是抱怨这个了又是抱怨那个了，就像上面说的我们不在一个实验室我就会大胆追她一样hhh反而说不定到最后毕业都不会认识她。我总会把一些不顺心的事归结于运气或者现状，就像我总在抱怨为什么大一转专业一样，当然现在看起来确实从计科转走是有点蠢了，但这又何尝不是我大学生涯后面堕落的咎由自取呢，我要是足够努力足够认真，说不定早就像4班那哥们一样去清华了呢（好像我又开始了。。）我现在觉得虽然说有句话是选择比努力更重要，但，谁又能说好什么样的选择是正确的选择呢？就像我们觉得盖茨退学或者马云辞职是非常正确的选择，但他们作出选择的时刻也是冒着无比大的风险的，幸存者偏差让我们看到了耀眼的他们而忽视了饿死在街头的李云王云。。<br><br>我想，现在的努力的究极意义才不是由于从一开始就知道什么选择正确才去奋斗，而是<strong>为了让当初的选择看起来正确，我们不得不奋斗，奔着当初选择的目标！</strong><br><br>（好的，溜去学习深度学习和迁移学习了，感觉写这个blog用了一个小时要毕不了业了hhhh</p>
+<div align="left">
+<img src="/assets/blogImg/blog2.2.jpg" width="200" height="200">
+</div>
 
-<h2 id="AOP（面向切面）"><a href="#AOP（面向切面）" class="headerlink" title="AOP（面向切面）"></a>AOP（面向切面）</h2><p>面向切面拦截的是类的元数据（包、类、方法名、参数等）AOP操作可以对操作进行横向的拦截,最大的优势在于他可以获取执行方法的参数,对方法进行统一的处理。</p>
-<p>相对于拦截器更加细致灵活，拦截器只能针对URL做拦截，而AOP针对具体的代码（可以理解为<strong>方法拦截</strong>），常见使用日志，事务，请求参数安全验证等能够实现更加复杂的业务逻辑。具体实现看前面总结。</p>
-
+<!-- 注释-->
       
 
       
@@ -246,7 +251,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Notes//" class="article-tag-list-link color1">Notes</a>
+        			<a href="/categories/Thoughts//" class="article-tag-list-link color4">Thoughts</a>
         		</li>
       		
 		</ul>
@@ -264,18 +269,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/03/01/Blog7/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/07/27/Blog190727/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          (no title)
+          随想0727
         
       </div>
     </a>
   
   
-    <a href="/2019/10/31/Blog6/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Spring学习小结02</div>
+    <a href="/2018/07/02/HelloWorld/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HelloWorld</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -317,7 +322,7 @@ if(true){
   	repo: 'Hhhhhhh1105.github.io',
   	owner: 'Hhhhhhh1105',
   	admin: ['Hhhhhhh1105'],
-  	id: 'Fri Dec 20 2019 20:13:00 GMT+0800',
+  	id: 'Sun Jul 14 2019 18:56:00 GMT+0800',
   	distractionFreeMode: 'true'
 })
 gitalk.render('gitalk-container') 
