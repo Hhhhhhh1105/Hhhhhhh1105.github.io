@@ -9,15 +9,21 @@
   <meta name="google-site-verification" content="pbFNLra7HsJ2hd9pjHoipvbz57toqPEe0q59ZMoI4Gk">
   
   <meta name="baidu-site-verification" content="gaVCFjCucA">
-  <title>hhhhhh&#39;s Blog</title>
+  <title>Spring 过滤器 拦截器 AOP小结 | hhhhhh&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="hhhhhh&#39;s Blog">
-<meta property="og:url" content="https://hhhhhhh1105.github.io/index.html">
+  <meta name="description" content="Spring 过滤器 拦截器 AOP小结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring 过滤器 拦截器 AOP小结">
+<meta property="og:url" content="https://hhhhhhh1105.github.io/2019/12/20/Blog4/index.html">
 <meta property="og:site_name" content="hhhhhh&#39;s Blog">
+<meta property="og:description" content="Spring 过滤器 拦截器 AOP小结">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="d:%5CLearn%5CMyBlog%5Csource%5Cassets%5CblogImg%5Cblog4%5Cimg1.png">
+<meta property="og:updated_time" content="2020-03-01T04:25:34.392Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hhhhhh&#39;s Blog">
+<meta name="twitter:title" content="Spring 过滤器 拦截器 AOP小结">
+<meta name="twitter:description" content="Spring 过滤器 拦截器 AOP小结">
+<meta name="twitter:image" content="d:%5CLearn%5CMyBlog%5Csource%5Cassets%5CblogImg%5Cblog4%5Cimg1.png">
   
     <link rel="alternative" href="/atom.xml" title="hhhhhh&#39;s Blog" type="application/atom+xml">
   
@@ -167,16 +173,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Blog4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Blog4" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/20/Blog4/">Spring 过滤器 拦截器 AOP小结</a>
+    <h1 class="article-title" itemprop="name">
+      Spring 过滤器 拦截器 AOP小结
     </h1>
   
 
@@ -190,9 +194,21 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>Spring 过滤器 拦截器 AOP小结</strong></p>
-        
-          <a class="article-more-a" href="/2019/12/20/Blog4/#more">more >></a>
-        
+<a id="more"></a>
+
+<p>这几天学习Spring的AOP时，脑海里都是按照方法拦截器思考的，因此本文对过滤器，拦截器，AOP的联系与区别进行小结。在实现一些公共逻辑的时候，很多功能通过过滤器，拦截器，AOP都能实现，但是不同的方式在执行逻辑（位置）上有不同的效率。</p>
+<p>[toc]</p>
+<h3 id="前后端基本逻辑"><a href="#前后端基本逻辑" class="headerlink" title="前后端基本逻辑"></a>前后端基本逻辑</h3><p><img src="D:%5CLearn%5CMyBlog%5Csource%5Cassets%5CblogImg%5Cblog4%5Cimg1.png" alt></p>
+<h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><p>过滤器拦截的是URL。Spring中自定义过滤器（Filter）一般只有一个方法（直接实现Filter接口，重写拦截方法doFilter，通过注解@WebFilter上配置拦截规则即可实现）。当请求到达web容器时，会探测当前请求地址是否配置有过滤器，有则调用该过滤器的方法（可能会有多个过滤器），然后才调用真实的业务逻辑，至此过滤器任务完成。所有的请求都会被filter首先拦截，并可以预处理request（解决中文乱码问题）。</p>
+<p>过滤器并没有定义业务逻辑执行前、后等，仅仅是请求到达就执行。FilterChain是双向的，即过滤链执行完，并且完成业务流程后，会返回到过滤器，此时也可以对请求的返回数据做处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="comment">// 配置过滤规则</span></span><br><span class="line"><span class="meta">@WebFilter</span>(urlPatterns = &#123; <span class="string">"/**"</span> &#125;, filterName = <span class="string">"tokenAuthorFilter"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigurationFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span></span>&#123;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span><span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">	<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">	System.out.println(<span class="string">"过滤器重写过滤方法"</span>);</span><br><span class="line">	chain.doFilter(request, response);<span class="comment">//到下一个链</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig arg0)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">	<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h3><p>拦截器拦截的是URL。拦截器有三个方法，相对于过滤器更加细致，有被拦截逻辑执行前、后等。Spring中拦截器有三个方法：preHandle（Controller方法调用之前），postHandle（请求处理之后进行调用（Controller方法调用之后），但是在视图被渲染之前），afterCompletion（在整个请求结束之后被调用，也就是在DispatcherServlet 渲染了对应的视图之后执行（主要是用于进行资源清理工作））。和filter类似 实现HandlerInterceptor接口并重写拦截方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">interceptorConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span></span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span></span>&#123;</span><br><span class="line">	registry.addInterceptor(<span class="keyword">new</span> MyInterceptor())</span><br><span class="line">	.addPathPatterns(<span class="string">"/**"</span>); <span class="comment">// //指定拦截器类，指定该类拦截的url</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="AOP（面向切面）"><a href="#AOP（面向切面）" class="headerlink" title="AOP（面向切面）"></a>AOP（面向切面）</h2><p>面向切面拦截的是类的元数据（包、类、方法名、参数等）AOP操作可以对操作进行横向的拦截,最大的优势在于他可以获取执行方法的参数,对方法进行统一的处理。</p>
+<p>相对于拦截器更加细致灵活，拦截器只能针对URL做拦截，而AOP针对具体的代码（可以理解为<strong>方法拦截</strong>），常见使用日志，事务，请求参数安全验证等能够实现更加复杂的业务逻辑。具体实现看前面总结。</p>
+
       
 
       
@@ -214,16 +230,24 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/20/Blog4/">展开全文 >></a>
-        </p>
-      
 
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/31/Blog6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring学习小结02</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -242,383 +266,34 @@
 </aside>
 
 
-
-  
-    <article id="post-Blog6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/31/Blog6/">Spring学习小结02</a>
-    </h1>
   
 
-        
-        <a href="/2019/10/31/Blog6/" class="archive-article-date">
-  	<time datetime="2019-10-31T07:58:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Spring学习小结02"><a href="#Spring学习小结02" class="headerlink" title="Spring学习小结02"></a><strong>Spring学习小结02</strong></h2>
-        
-          <a class="article-more-a" href="/2019/10/31/Blog6/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Notes//" class="article-tag-list-link color1">Notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/31/Blog6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
+   
 
   
-    <article id="post-Blog5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/28/Blog5/">Spring学习小结01</a>
-    </h1>
-  
+  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
 
-        
-        <a href="/2019/10/28/Blog5/" class="archive-article-date">
-  	<time datetime="2019-10-28T08:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Spring学习小结01"><a href="#Spring学习小结01" class="headerlink" title="Spring学习小结01"></a><strong>Spring学习小结01</strong></h2>
-        
-          <a class="article-more-a" href="/2019/10/28/Blog5/#more">more >></a>
-        
-      
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Notes//" class="article-tag-list-link color1">Notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/28/Blog5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-Blog3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/27/Blog3/">随想0727</a>
-    </h1>
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: '69d14c5e5d6e9ec19201',
+  	clientSecret: 'a44d3f45b75356aaa7e8f0f9ce594e1710cf4e20',
+  	repo: 'Hhhhhhh1105.github.io',
+  	owner: 'Hhhhhhh1105',
+  	admin: ['Hhhhhhh1105'],
+  	id: 'Fri Dec 20 2019 20:13:00 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
   
 
-        
-        <a href="/2019/07/27/Blog3/" class="archive-article-date">
-  	<time datetime="2019-07-27T13:13:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>n场汇报后躺尸的我</strong></p>
-        
-          <a class="article-more-a" href="/2019/07/27/Blog3/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Thoughts//" class="article-tag-list-link color4">Thoughts</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/27/Blog3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-Blog2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/14/Blog2/">随想0714</a>
-    </h1>
   
 
-        
-        <a href="/2019/07/14/Blog2/" class="archive-article-date">
-  	<time datetime="2019-07-14T10:56:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>记桓台出差与夏令营志愿者第一天</strong></p>
-        
-          <a class="article-more-a" href="/2019/07/14/Blog2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Thoughts//" class="article-tag-list-link color4">Thoughts</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/14/Blog2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-HelloWorld" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/02/HelloWorld/">HelloWorld</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/02/HelloWorld/" class="archive-article-date">
-  	<time datetime="2018-07-02T10:27:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>第一次尝试记录我的生活</strong></p>
-        
-          <a class="article-more-a" href="/2018/07/02/HelloWorld/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Thoughts//" class="article-tag-list-link color4">Thoughts</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/02/HelloWorld/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
   
 
 
@@ -646,8 +321,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
