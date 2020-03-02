@@ -9,15 +9,19 @@
   <meta name="google-site-verification" content="pbFNLra7HsJ2hd9pjHoipvbz57toqPEe0q59ZMoI4Gk">
   
   <meta name="baidu-site-verification" content="gaVCFjCucA">
-  <title>Archives: 2018 | hhhhhh&#39;s Blog</title>
+  <title>安卓后台进程保活实践 | hhhhhh&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="hhhhhh&#39;s Blog">
-<meta property="og:url" content="https://hhhhhhh1105.github.io/archives/2018/index.html">
+  <meta name="description" content="近日在桓台河长制App开发过程中，出现了一系列难以复现的bug。究其原因大致都是在用户巡河过程中，手机由于电源管理策略关闭了后台运行的巡河计时，定位，数据上传等进程（服务）。 针对实验室开发的河长制类APP，Android 进程如何保活是非常必要的讨论。随着Android 版本的迭代，很多早期可用的进程保活手段已经失效。因此本文了解了实践多种别人提出的App保活方案，同时通过加入白名单的方式，遗留">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓后台进程保活实践">
+<meta property="og:url" content="https://hhhhhhh1105.github.io/2019/12/26/Blog191226/index.html">
 <meta property="og:site_name" content="hhhhhh&#39;s Blog">
+<meta property="og:description" content="近日在桓台河长制App开发过程中，出现了一系列难以复现的bug。究其原因大致都是在用户巡河过程中，手机由于电源管理策略关闭了后台运行的巡河计时，定位，数据上传等进程（服务）。 针对实验室开发的河长制类APP，Android 进程如何保活是非常必要的讨论。随着Android 版本的迭代，很多早期可用的进程保活手段已经失效。因此本文了解了实践多种别人提出的App保活方案，同时通过加入白名单的方式，遗留">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-02T05:03:22.376Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hhhhhh&#39;s Blog">
+<meta name="twitter:title" content="安卓后台进程保活实践">
+<meta name="twitter:description" content="近日在桓台河长制App开发过程中，出现了一系列难以复现的bug。究其原因大致都是在用户巡河过程中，手机由于电源管理策略关闭了后台运行的巡河计时，定位，数据上传等进程（服务）。 针对实验室开发的河长制类APP，Android 进程如何保活是非常必要的讨论。随着Android 版本的迭代，很多早期可用的进程保活手段已经失效。因此本文了解了实践多种别人提出的App保活方案，同时通过加入白名单的方式，遗留">
   
     <link rel="alternative" href="/atom.xml" title="hhhhhh&#39;s Blog" type="application/atom+xml">
   
@@ -170,48 +174,168 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Blog191226" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/01/Blog181101/" class="archive-article-date">
-  	<time datetime="2018-11-01T01:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-01</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/01/Blog181101/">PaperNote_2</a>
+    <h1 class="article-title" itemprop="name">
+      安卓后台进程保活实践
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">脉冲涡流检测（PEC）</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        <a href="/2019/12/26/Blog191226/" class="archive-article-date">
+  	<time datetime="2019-12-26T15:50:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-26</time>
+</a>
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2.6k 字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长约: </span>
+        <span class="post-count">10 分</span>
+      </span>
+    </span>
+</div>
 
           
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>近日在桓台河长制App开发过程中，出现了一系列难以复现的bug。究其原因大致都是在用户巡河过程中，手机由于电源管理策略关闭了后台运行的巡河计时，定位，数据上传等进程（服务）。</p>
+<p>针对实验室开发的河长制类APP，Android 进程如何保活是非常必要的讨论。随着Android 版本的迭代，很多早期可用的进程保活手段已经失效。因此本文了解了实践多种别人提出的App保活方案，同时通过加入白名单的方式，遗留已久且困扰我们很长时间的巡河进程保活问题得到了较好的解决。</p>
+<a id="more"></a>
+
+<p>总结：到目前为止（Android8.0），仍能保证有效进程保活方式为将App加入后台白名单，其余多数方法均已失效。方案四（白名单）用户体验较好且可以实现进程保活。</p>
+<h3 id="方式一：基于AlarmManager的定时提醒"><a href="#方式一：基于AlarmManager的定时提醒" class="headerlink" title="方式一：基于AlarmManager的定时提醒"></a>方式一：基于AlarmManager的定时提醒</h3><p>AlarmManager是Android中常用的一种系统级别的提示服务，在特定的时刻为我们广播一个指定的Intent。简单的说就是我们设定一个时间，然后在该时间到来时，AlarmManager为我们广播一个我们设定的Intent。</p>
+<p>因此我首先尝试在<code>ChiefEditRecordActivity</code>巡河界面中加入定时器，企图每秒钟都唤醒一次，具体实现如下。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">	Intent intent = <span class="keyword">new</span> Intent(<span class="string">"MYALARMRECEIVER"</span>);</span><br><span class="line"><span class="comment">//简化测试，仅put巡河时长</span></span><br><span class="line">	intent.putExtra(<span class="string">"msg"</span>,riverRecordTempPassTime);</span><br><span class="line">	PendingIntent pi = PendingIntent.getBroadcast(<span class="keyword">this</span>,<span class="number">0</span>,intent,<span class="number">0</span>);</span><br><span class="line">	AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);</span><br><span class="line">	am.setRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),<span class="number">1</span>*<span class="number">1000</span>,pi);</span><br></pre></td></tr></table></figure>
+
+<p>此处省略广播接收器实现。</p>
+<p><strong>Note</strong>：经过测试，该进程保活方法至少在华为、小米、三星等手机中失效。</p>
+<h3 id="方式二：绑定通知栏成为前台服务"><a href="#方式二：绑定通知栏成为前台服务" class="headerlink" title="方式二：绑定通知栏成为前台服务"></a>方式二：绑定通知栏成为前台服务</h3><p>绑定巡河服务成为前台Notification。Android 中 Service 的优先级为4，通过 setForeground 接口可以将后台 Service 设置为前台 Service，使进程的优先级由4提升为2，从而使进程的优先级仅仅低于用户当前正在交互的进程，与可见进程优先级一致，使进程被杀死的概率大大降低。</p>
+<p>根据参考的博客所说，<code>将service绑定到notification，就成为了一个用户可见的前台服务，这样可以大大提高存活率</code>，当我看到提高存活率时心就已经凉了一半，但没办法抱着试一试的态度尝试实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">riverRecordService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"DaemonService"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NOTICE_ID = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Nullable</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        <span class="keyword">if</span>(Contants.DEBUG)</span><br><span class="line">            Log.d(TAG,<span class="string">"riverRecordService----&gt;onCreate被调用，启动前台service"</span>);</span><br><span class="line">        <span class="comment">//如果API大于18，需要弹出一个可见通知</span></span><br><span class="line">        <span class="keyword">if</span>(Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.JELLY_BEAN_MR2)&#123;</span><br><span class="line">            Notification.Builder builder = <span class="keyword">new</span> Notification.Builder(<span class="keyword">this</span>);</span><br><span class="line">            builder.setSmallIcon(R.mipmap.ic_launcher);</span><br><span class="line">            builder.setContentTitle(<span class="string">"KeepAppAlive"</span>);</span><br><span class="line">            builder.setContentText(<span class="string">"DaemonService is runing..."</span>);</span><br><span class="line">            startForeground(NOTICE_ID,builder.build());</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            startForeground(NOTICE_ID,<span class="keyword">new</span> Notification());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 如果Service被终止，当资源允许情况下，重启service</span></span><br><span class="line">        <span class="keyword">return</span> START_STICKY;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        <span class="comment">// 如果Service被杀死，干掉通知</span></span><br><span class="line">        <span class="keyword">if</span>(Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.JELLY_BEAN_MR2)&#123;</span><br><span class="line">            NotificationManager mManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);</span><br><span class="line">            mManager.cancel(NOTICE_ID);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(Contants.DEBUG)</span><br><span class="line">        <span class="comment">// 重启自己</span></span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent(getApplicationContext(),DaemonService.class);</span><br><span class="line">        startService(intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Note</strong>： 以上实现仍不能实现以上个手机中的APP进程保活，但是却有个技巧值得借鉴：</p>
+<ul>
+<li>在<code>onStartCommand</code>方法中返回<code>START_STICKY</code>，其作用是当Service进程被kill后，系统会尝试重新创建这个Service，且会保留Service的状态为开始状态，但不保留传递的Intent对象，<code>onStartCommand</code>方法一定会被重新调用。</li>
+<li>在<code>onDestory</code>方法中重新启动自己，也就是说，只要Service在被销毁时我们就重新启动它。</li>
+</ul>
+<h3 id="方式三：非常规方法"><a href="#方式三：非常规方法" class="headerlink" title="方式三：非常规方法"></a>方式三：非常规方法</h3><p>在网上查阅资料时也同时看到了以下实现方法，但是由于其实现的特殊性（黑科技），个人总觉得有些不合理，应谨慎使用。（ps：也几乎都失效了，果然是魔高一尺道高一丈）</p>
+<h4 id="3-1-Service中循环播放一段无声音频"><a href="#3-1-Service中循环播放一段无声音频" class="headerlink" title="3.1 Service中循环播放一段无声音频"></a>3.1 Service中循环播放一段无声音频</h4><p>这是我本人实践的唯一一种方式。原理在于进程循环播放无声音频，提升进程优先级。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        <span class="keyword">if</span>(Contants.DEBUG)</span><br><span class="line">        mMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.silent);</span><br><span class="line">        mMediaPlayer.setLooping(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>无声音频下载：<a href="https://pan.baidu.com/s/1smPKs5f" target="_blank" rel="noopener">https://pan.baidu.com/s/1smPKs5f</a></p>
+<p><strong>Note：</strong>通过该方式，进程存活的时间确实有所增加，但还是在5 min 内会被华为，小米等品牌手机杀死.</p>
+<h4 id="3-2-双进程守护"><a href="#3-2-双进程守护" class="headerlink" title="3.2 双进程守护"></a>3.2 双进程守护</h4><p>所谓双进程守护原理就是很简单：两个进程的Service，相互守护；当一个进程的Service挂的时候，另一个进程的Service负责重启挂掉的Service。</p>
+<p>守护进程其实是一个双向守护的过程，比如<code>KeepAliveService</code>挂了，那么<code>RemoteService</code>负责将<code>KeepAliveService</code>重启；同理，如果<code>RemoteService</code>挂了的话，<code>KeepAliveService</code>负责将<code>RemoteService</code>重启.所以我们可以通过<strong>AIDL</strong>来确保两个不同进程的Service可以通信。</p>
+<p>本人没有实践该方式，具体实现可参考博客：</p>
+<p><a href="https://blog.csdn.net/chunqiuwei/article/details/95649955" target="_blank" rel="noopener">https://blog.csdn.net/chunqiuwei/article/details/95649955</a></p>
+<h4 id="3-3-1像素Activity"><a href="#3-3-1像素Activity" class="headerlink" title="3.3 1像素Activity"></a>3.3 1像素Activity</h4><p>1像素Activity的特点： 需要设置该activity的style设置透明，在手机锁屏时start；在屏幕解锁时finish，主要作用就是在App退到后台之后且锁屏的时候启动一个看不见的Activity，造成一个该App没有回退到后台的假象，降低被杀的几率。（据说早年间的手机QQ也是通过该方式保活）</p>
+<p>本人没有实践该方式，具体实现可参考博客：</p>
+<p><a href="https://blog.csdn.net/chunqiuwei/article/details/95649955" target="_blank" rel="noopener">https://blog.csdn.net/chunqiuwei/article/details/95649955</a></p>
+<h3 id="方式四：后台白名单（ps：真正有效且用户体验较好）"><a href="#方式四：后台白名单（ps：真正有效且用户体验较好）" class="headerlink" title="方式四：后台白名单（ps：真正有效且用户体验较好）"></a>方式四：后台白名单（ps：真正有效且用户体验较好）</h3><p>[1] <a href="https://juejin.im/post/5dfaeccbf265da33910a441d" target="_blank" rel="noopener">https://juejin.im/post/5dfaeccbf265da33910a441d</a></p>
+<p>从 Android 6.0 开始，系统为了省电增加了休眠模式，系统待机一段时间后，会杀死后台正在运行的进程。但系统会有一个后台运行白名单，白名单里的应用将不会受到影响，在原生系统下，通过「设置」 - 「电池」 - 「电池优化」 - 「未优化应用」，可以看到这个白名单。</p>
+<p>具体实现分为两步：1.加入后台运行白名单 2.厂商后台管理</p>
+<h4 id="加入后台运行白名单"><a href="#加入后台运行白名单" class="headerlink" title="加入后台运行白名单"></a>加入后台运行白名单</h4><ul>
+<li><p>在<code>AndroidManifest.xml</code> 文件中配置一下权限</p>
+<ul>
+<li><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>判断是否在白名单并加入</p>
+<ul>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断白名单</span></span><br><span class="line"><span class="meta">@RequiresApi</span>(api = Build.VERSION_CODES.M)</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isIgnoringBatteryOptimizations</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> isIgnoring = <span class="keyword">false</span>;</span><br><span class="line">    PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);</span><br><span class="line">    <span class="keyword">if</span> (powerManager != <span class="keyword">null</span>) &#123;</span><br><span class="line">        isIgnoring = powerManager.isIgnoringBatteryOptimizations(getPackageName());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> isIgnoring;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 加入白名单</span></span><br><span class="line"><span class="meta">@RequiresApi</span>(api = Build.VERSION_CODES.M)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestIgnoreBatteryOptimizations</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);</span><br><span class="line">        intent.setData(Uri.parse(<span class="string">"package:"</span> + getPackageName()));</span><br><span class="line">        <span class="comment">//如果要判断用户是否点击了允许，可以调用 startActivityForResult，在 onActivityResult 里再判断一次是否在白名单中。</span></span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="厂商后台管理"><a href="#厂商后台管理" class="headerlink" title="厂商后台管理"></a>厂商后台管理</h4><p>几乎各个厂商都有自己的后台管理，就算应用加入了后台运行白名单，仍然可能会被厂商自己的后台管理干掉。如果能把应用加入厂商系统的后台管理白名单，可以进一步降低进程被杀的概率。不同的厂商在不同的地方进行设置，一般是在各自的「手机管家」，但更难的是，就算同一个厂商的系统，不同的版本也可能是在不同地方设置。</p>
+<p>最理想(用户体验)的做法是，我们根据不同手机，提供一个按钮，直接跳转到指定页面进行设置。</p>
+<ul>
+<li><p>跳转指定应用页面方法</p>
+<ul>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 跳转到指定应用的首页</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">showActivity</span><span class="params">(@NonNull String packageName)</span> </span>&#123;</span><br><span class="line">    Intent intent = getPackageManager().getLaunchIntentForPackage(packageName);</span><br><span class="line">    startActivity(intent);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 跳转到指定应用的指定页面</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">showActivity</span><span class="params">(@NonNull String packageName, @NonNull String activityDir)</span> </span>&#123;</span><br><span class="line">    Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">    intent.setComponent(<span class="keyword">new</span> ComponentName(packageName, activityDir));</span><br><span class="line">    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">    startActivity(intent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>厂商判断：包括华为，小米，oppo，vivo，魅族，三星等</p>
+<ul>
+<li><p>判断华为&amp;跳转华为手机管家的启动管理页： </p>
+<ul>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isHuawei</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (Build.BRAND == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Build.BRAND.toLowerCase().equals(<span class="string">"huawei"</span>) || Build.BRAND.toLowerCase().equals(<span class="string">"honor"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">goHuaweiSetting</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        showActivity(<span class="string">"com.huawei.systemmanager"</span>,</span><br><span class="line">            <span class="string">"com.huawei.systemmanager.startupmgr.ui.StartupNormalAppListActivity"</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        showActivity(<span class="string">"com.huawei.systemmanager"</span>,</span><br><span class="line">            <span class="string">"com.huawei.systemmanager.optimize.bootstart.BootStartActivity"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>判断小米&amp;跳转小米手机管家的启动管理页： </p>
+<ul>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isXiaomi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Build.BRAND != <span class="keyword">null</span> &amp;&amp; Build.BRAND.toLowerCase().equals(<span class="string">"xiaomi"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">goXiaomiSetting</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    showActivity(<span class="string">"com.miui.securitycenter"</span>,</span><br><span class="line">        <span class="string">"com.miui.permcenter.autostart.AutoStartManagementActivity"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>判断OPPO&amp;跳转OPPO手机管家的启动管理页： </p>
+<ul>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isOPPO</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Build.BRAND != <span class="keyword">null</span> &amp;&amp; Build.BRAND.toLowerCase().equals(<span class="string">"oppo"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">goOPPOSetting</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">      showActivity(<span class="string">"com.coloros.phonemanager"</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (Exception e1) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          showActivity(<span class="string">"com.oppo.safe"</span>);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (Exception e2) &#123;</span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">              showActivity(<span class="string">"com.coloros.oppoguardelf"</span>);</span><br><span class="line">          &#125; <span class="keyword">catch</span> (Exception e3) &#123;</span><br><span class="line">              showActivity(<span class="string">"com.coloros.safecenter"</span>);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>判断VIVO&amp;跳转VIVO手机管家的启动管理页： </p>
+<ul>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isVIVO</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> Build.BRAND != <span class="keyword">null</span> &amp;&amp; Build.BRAND.toLowerCase().equals(<span class="string">"vivo"</span>);</span><br><span class="line">&#125;  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">goVIVOSetting</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  showActivity(<span class="string">"com.iqoo.secure"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>判断魅族&amp;跳转魅族手机管家的启动管理页： </p>
+<ul>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isMeizu</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> Build.BRAND != <span class="keyword">null</span> &amp;&amp; Build.BRAND.toLowerCase().equals(<span class="string">"meizu"</span>);</span><br><span class="line">&#125;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">goMeizuSetting</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  showActivity(<span class="string">"com.meizu.safe"</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>判断三星&amp;跳转三星手机管家的启动管理页： </p>
+<ul>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isSamsung</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Build.BRAND != <span class="keyword">null</span> &amp;&amp; Build.BRAND.toLowerCase().equals(<span class="string">"samsung"</span>);</span><br><span class="line">&#125; </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">goSamsungSetting</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">      showActivity(<span class="string">"com.samsung.android.sm_cn"</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">      showActivity(<span class="string">"com.samsung.android.sm"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Note</strong>: 经过测试，该方法是目前用户体验较好的解决办法，同时可以保证后台进程的保活，至于还会不会有其他问题（手机型号）要等用户反馈再说了。</p>
+<p>至此，遗留已久且困扰我们很长时间的巡河进程保活问题得到了较好的解决方案，除此之外还有一些话想说。</p>
+<ul>
+<li>在调查解决方案时，发现StackOverflow上很少有类似的问题，究其原因，是Google服务提供的 <code>FCM</code> 可以实现应用的有效拉活，所以墙的利弊关系还是值得深入讨论一番的。</li>
+<li>另外在查询资料时，发现CSDN上的博客质量真是良莠不齐，有好多都是搬运的很久之前的，根本没有自己实践过，仍然记录着很久以前的实现方案，殊不知很多方案早就不能使用了。实践才是检验真理的唯一标准啊（Show me the code）</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -224,104 +348,85 @@
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/10/10/Blog181010/" class="archive-article-date">
-  	<time datetime="2018-10-10T04:08:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-10</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/20/Blog191220/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring 过滤器 拦截器 AOP小结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/10/Blog181010/">PaperNote_1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">脉冲涡流检测（PEC）</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Notes//" class="article-tag-list-link color1">Notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#方式一：基于AlarmManager的定时提醒"><span class="toc-number">1.</span> <span class="toc-text">方式一：基于AlarmManager的定时提醒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方式二：绑定通知栏成为前台服务"><span class="toc-number">2.</span> <span class="toc-text">方式二：绑定通知栏成为前台服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方式三：非常规方法"><span class="toc-number">3.</span> <span class="toc-text">方式三：非常规方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-Service中循环播放一段无声音频"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 Service中循环播放一段无声音频</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-双进程守护"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 双进程守护</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1像素Activity"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 1像素Activity</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方式四：后台白名单（ps：真正有效且用户体验较好）"><span class="toc-number">4.</span> <span class="toc-text">方式四：后台白名单（ps：真正有效且用户体验较好）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#加入后台运行白名单"><span class="toc-number">4.1.</span> <span class="toc-text">加入后台运行白名单</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#厂商后台管理"><span class="toc-number">4.2.</span> <span class="toc-text">厂商后台管理</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/02/HelloWorld/" class="archive-article-date">
-  	<time datetime="2018-07-02T10:27:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/02/HelloWorld/">HelloWorld</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Thoughts//" class="article-tag-list-link color4">Thoughts</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+   
+
+  
+  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: '69d14c5e5d6e9ec19201',
+  	clientSecret: 'a44d3f45b75356aaa7e8f0f9ce594e1710cf4e20',
+  	repo: 'Hhhhhhh1105.github.io',
+  	owner: 'Hhhhhhh1105',
+  	admin: ['Hhhhhhh1105'],
+  	id: 'Thu Dec 26 2019 23:50:00 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -349,8 +454,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
