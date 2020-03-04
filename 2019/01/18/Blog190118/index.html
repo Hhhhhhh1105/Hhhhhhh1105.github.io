@@ -12,14 +12,14 @@
   <title>DTL在跨域故障诊断领域应用综述 | hhhhhh&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="离放假只有几周的时间了，最近都没有好好科研，颓废颓废">
-<meta name="keywords" content="深度迁移学习（DTL）,Review">
+<meta name="keywords" content="深度迁移学习（DTL）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DTL在跨域故障诊断领域应用综述">
 <meta property="og:url" content="https://hhhhhhh1105.github.io/2019/01/18/Blog190118/index.html">
 <meta property="og:site_name" content="hhhhhh&#39;s Blog">
 <meta property="og:description" content="离放假只有几周的时间了，最近都没有好好科研，颓废颓废">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-03-04T17:01:48.691Z">
+<meta property="og:updated_time" content="2020-03-04T17:04:26.719Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DTL在跨域故障诊断领域应用综述">
 <meta name="twitter:description" content="离放假只有几周的时间了，最近都没有好好科研，颓废颓废">
@@ -219,7 +219,7 @@
         <p>离放假只有几周的时间了，最近都没有好好科研，颓废颓废</p>
 <a id="more"></a>
 
-<h1 id="基于知识转移策略的跨域故障诊断-综述"><a href="#基于知识转移策略的跨域故障诊断-综述" class="headerlink" title="基于知识转移策略的跨域故障诊断:综述"></a>基于知识转移策略的跨域故障诊断:综述</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>近年来，随着机器学习技术的发展，数据驱动的故障诊断已成为热门话题。<strong>但是，训练数据和测试数据应遵循相同的分布的前提条件阻止了将传统的数据驱动的诊断方法应用于工程诊断问题。</strong>为了解决这一难题，在过去的五年中，使用知识转移策略进行跨域故障诊断变得越来越流行。基于转移学习的诊断方法<strong>旨在通过利用语义相关但分布在不同源域的知识来构建可以很好地完成目标任务的模型</strong>。本文首次总结了最新的跨域故障诊断研究工作。从三个不同的角度介绍了文献：研究动机，跨领域策略和应用对象。此外，还介绍了相应的开源故障数据集和一些未来的方向。该调查为读者提供了一个框架，以更好地理解和确定跨域故障诊断的研究现状，挑战和未来方向。</p>
+<h2 id="基于知识转移策略的跨域故障诊断-综述"><a href="#基于知识转移策略的跨域故障诊断-综述" class="headerlink" title="基于知识转移策略的跨域故障诊断:综述"></a>基于知识转移策略的跨域故障诊断:综述</h2><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>近年来，随着机器学习技术的发展，数据驱动的故障诊断已成为热门话题。<strong>但是，训练数据和测试数据应遵循相同的分布的前提条件阻止了将传统的数据驱动的诊断方法应用于工程诊断问题。</strong>为了解决这一难题，在过去的五年中，使用知识转移策略进行跨域故障诊断变得越来越流行。基于转移学习的诊断方法<strong>旨在通过利用语义相关但分布在不同源域的知识来构建可以很好地完成目标任务的模型</strong>。本文首次总结了最新的跨域故障诊断研究工作。从三个不同的角度介绍了文献：研究动机，跨领域策略和应用对象。此外，还介绍了相应的开源故障数据集和一些未来的方向。该调查为读者提供了一个框架，以更好地理解和确定跨域故障诊断的研究现状，挑战和未来方向。</p>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>随着现代工业的发展，对机械系统可靠性和安全性的要求越来越高，维修管理也面临着新的挑战。为了满足这些需求，开发预后和健康管理(PHM)系统是一个很有前途的方法，该系统旨在通过监测实时健康状况和性能退化趋势来合理分配维护资源。作为PHM的重要组成部分之一，故障诊断以检测和识别故障为核心，在工业应用中对保证安全运行、避免经济损失至关重要。近年来，随着工业大数据的积累和机器学习特别是深度学习[5]-[7]的快速发展，数据驱动的故障诊断方法成为研究热点。一般来说,传统的机器学习算法,如支持向量机(SVM)[8],随机森林(RF)[9],knn[10]或深层神经网络，如堆叠Auto-encoders等(sAE)[11],深层信念网络(DBN)[12],和卷积神经网络(CNN)[13],[14]学习故障特征和识别模型从大量的历史数据。</p>
 <p>基于传统机器学习和深度学习的数据驱动诊断方法的一般实现流程分别如图1 (a)和图1 (b)所示。图1所示。框架显示了数据驱动的故障诊断的一般实现过程。(a)基于传统机器学习方法的步骤，(b)基于深度学习方法的步骤。传统的机器学习方法，如时域统计、频域分析和时频分析[15]，都需要特征提取这一步。与之不同的是，基于深度学习的诊断方法无需人工特征提取和选择，即可从原始监测信号中自动学习鉴别特征，如图1 (b)所示。</p>
 <p>数据是诊断知识的载体，决定着数据驱动诊断模型的性能。为保证测试数据的鲁棒性和泛化性能，训练诊断模型阶段应满足两个前提条件:(1)有大量高质量的标注数据;(2)待测数据与训练数据分布相同。事实上,如图1所示,数据驱动的诊断方法的常用的验证方式[8],[14]保证这两个先决条件通过分裂一个数据集分为训练集和测试集,但在实际诊断的情况下,这种验证方式是不切实际的,并且满足先决条件是非常困难由于以下两个问题:(1)一般来说,很难甚至不可能得到相同的训练数据集分布的测试数据集建立诊断模型之前,因为这意味着我们需要收集数据的每个故障类别在同一台机器上,甚至相同的操作条件下与目标。(2)对于在役机器，由于可能不允许其在故障条件下连续工作，所以可以获得稀缺的标号故障数据。这两个障碍阻碍了基于传统机器学习和深度学习的诊断方法在工程故障诊断中的应用。</p>
@@ -285,10 +285,6 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">深度迁移学习（DTL）</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Review</a>
         		</li>
       		
 		</ul>
